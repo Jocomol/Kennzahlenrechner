@@ -46,7 +46,10 @@ class Main():
         zinsen = self.bilanz_yaml["Erfolgsrechnung"]["Aufwand"]["zinsen"]
         gesamtkapital = self.self.bilanz_yaml["Bilanz"]["gesamtvermögen"]
         resultat = (reingewinn + zinsen) * 100 / gesamtkapital
-        print (resultat)
+        if resultat >= 5:
+            print(colorful.green("Die Gesamtkapitalrentabilität liegt bei " + resultat +"%."))
+        else:
+            print(colorful.red("Die Gesamtkapitalrentabilität liegt bei " + resultat +"%. Sie ist damit NICHT gewährleistet."))
 
 
 if __name__ == "__main__":
