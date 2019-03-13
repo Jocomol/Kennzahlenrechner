@@ -47,9 +47,9 @@ class Main():
         gesamtkapital = self.bilanz_yaml["Bilanz"]["gesamtvermoegen"]
         resultat = (reingewinn + zinsen) * 100 / gesamtkapital
         if resultat >= 5:
-            print(colorful.green("Die Gesamtkapitalrentabilität liegt bei " + resultat +"%."))
+            print(colorful.green("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) +"%."))
         else:
-            print(colorful.red("Die Gesamtkapitalrentabilität liegt bei " + resultat +"%. Sie ist damit NICHT gewährleistet."))
+            print(colorful.red("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) +"%. Sie ist damit NICHT gewährleistet."))
 
 
 if __name__ == "__main__":
