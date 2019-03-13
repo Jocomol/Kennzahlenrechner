@@ -52,9 +52,9 @@ class Main():
             print(colorful.red("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) +"%. Sie ist damit NICHT gewährleistet."))
 
     def cal_liquiditaetsgrad1(self):
-        liquide_mittel = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermögen"]["liquide_mittel"]
+        liquide_mittel = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermoegen"]["liquide_mittel"]
         kurzfristiges_FK = 0
-        for kf_fk in self.bilanz_yaml["Bilanz"]["Fremdkapital"]["Kurzfristiges_FK"]:
+        for kf_fk in self.bilanz_yaml["Bilanz"]["Passiven"]["Fremdkapital"]["Kurzfristiges_FK"]:
             kurzfristiges_FK = kurzfristiges_FK + kf_fk
         resultat = liquide_mittel * 100 / kurzfristiges_FK
         if resultat >= self.liquidmin_1 and resultat <= self.liquidmax_1:
@@ -70,4 +70,5 @@ class Main():
 if __name__ == "__main__":
     programm = Main()
     programm.cal_gesamtkapitalrent()
+    programm.cal_liquiditaetsgrad1()
     x = input("press enter to end")
