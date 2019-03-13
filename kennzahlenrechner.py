@@ -28,6 +28,20 @@ class Main():
         self.anlagedeckungsgradmax_1 = self.std_kennzahlen_yaml["kennzahlen"]["anlagedeckungsgradmax_1"]
         self.anlagedeckungsgrad_2 = self.std_kennzahlen_yaml["kennzahlen"]["anlagedeckungsgrad_2"]
 
+        self.geschäftsform = self.bilanz_yaml["Bemerkungen"]["geschäftsform"]
+        self.vorraete_anfangs_jahr = self.bilanz_yaml["Bemerkungen"]["vorraete_anfangs_jahr"]
+        self.debitorenstand_anfangs_jahr = self.bilanz_yaml["Bemerkungen"]["debitorenstand_anfangs_jahr"]
+        self.umsatzrentabilitaet = self.bilanz_yaml["Bemerkungen"]["umsatzrentabilitaet"]
+        self.kapitalumschlag = self.bilanz_yaml["Bemerkungen"]["kapitalumschlag"]
+        self.anlagenintensitaet = self.bilanz_yaml["Bemerkungen"]["anlagenintensitaet"]
+        self.selbstfinanzierungsgrad = self.bilanz_yaml["Bemerkungen"]["selbstfinanzierungsgrad"]
+
+
+    def validate_bilanz():
+        print("WIP")
+        #TODO
+    def
 
 if __name__ == "__main__":
     programm = Main()
+    x = input("press enter to end")

@@ -1,41 +1,45 @@
 - Bilanz:
   gesamtvermoegen: 1000
-  #Aktiven
-  #Umlaufvermoegen:
-  liquide_mittel: 100
-  debitoren: 250
-  vorraete: 250
-  #Anlagevermoegen:
-  mobiliar: 100
-  immobilien: 300
-  #Passiven:
-  #Fremdkapital:
-  Kreditoren: 200
-  Bankschuld: 100 #falls Keine Bankschuld vorhanden ist, wert auf NULL setzen
-  Darlehen: 50
-  Hypotheken: 200
-  #Eigenkapital
-  aktienkapital: 300
-  reserven: 100
-  gewinnvortrag: 50
+  Aktiven:
+    Umlaufvermoegen:
+      liquide_mittel: 100
+      debitoren: 250
+      vorraete: 250
+    Anlagevermoegen:
+      mobiliar: 100
+      immobilien: 300
+  Passiven:
+    Fremdkapital:
+      Kreditoren: 200
+      Bankschuld: 100 #falls Keine Bankschuld vorhanden ist, wert auf NULL setzen
+      Darlehen: 50
+      Hypotheken: 200
+    Eigenkapital:
+      aktienkapital: 300
+      reserven: 100
+      gewinnvortrag: 50
 
 - Erfolgsrechnung:
   gewinn: 50
   verlust: NULL
-  #Aufwand:
-  personal: 850
-  warenaufwand: 450
-  miete: 135
-  zinsen: 15
-  abschreibungen: 70
-  unterhalt: 120
-  werbung: 170
-  betriebsaufwand: 50
-  anderer_aufwand: 90
-  #Ertrag
-  verkaufserloes: 2000
+  Aufwand:
+    personal: 850
+    warenaufwand: 450
+    miete: 135
+    zinsen: 15
+    abschreibungen: 70
+    unterhalt: 120
+    werbung: 170
+    betriebsaufwand: 50
+    anderer_aufwand: 90
+  Ertrag:
+    verkaufserloes: 2000
 
 - Bemerkungen:
-  geschäftsform: AG
+  geschäftsform: 'AG'
   vorraete_anfangs_jahr: 0
   debitorenstand_anfangs_jahr: 250
+  umsatzrentabilitaet: 2.5
+  kapitalumschlag: 2
+  anlagenintensitaet: 40
+  selbstfinanzierungsgrad: 50
