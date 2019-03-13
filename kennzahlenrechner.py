@@ -40,7 +40,7 @@ class Main():
     def validate_bilanz():
         print("WIP")
         #TODO
-    def
+
 
 if __name__ == "__main__":
     programm = Main()

@@ -1,4 +1,4 @@
-- Bilanz:
+Bilanz:
   gesamtvermoegen: 1000
   Aktiven:
     Umlaufvermoegen:
@@ -19,7 +19,7 @@
       reserven: 100
       gewinnvortrag: 50
 
-- Erfolgsrechnung:
+Erfolgsrechnung:
   gewinn: 50
   verlust: NULL
   Aufwand:
@@ -35,7 +35,7 @@
   Ertrag:
     verkaufserloes: 2000
 
-- Bemerkungen:
+Bemerkungen:
   geschäftsform: 'AG'
   vorraete_anfangs_jahr: 0
   debitorenstand_anfangs_jahr: 250

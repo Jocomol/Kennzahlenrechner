@@ -1,18 +1,17 @@
-- kennzahlen:
-    eigenkapitalrent: 8
-    gesamtkapitalrent: 5
-    liquidmin_1: 10
-    liquidmax_1: 35
-    liquid_2: 100
-    liquidmin_3: 150
-    liquidmax_3: 200
-    lagerumschlag: 3
-    debitorenzahlungsfrist: 30
-    fremdfinanzierungsgradmin: 40
-    fremdfinanzierungsgradmax: 70
-    eigenfinanzierungsgradmin: 30
-    eigenfinanzierungsgradmax: 60
-    anlagedeckungsgradmin_1: 75
-    anlagedeckungsgradmax_1: 100
-    anlagedeckungsgrad_2: 100
-    
+kennzahlen:
+  eigenkapitalrent: 8
+  gesamtkapitalrent: 5
+  liquidmin_1: 10
+  liquidmax_1: 35
+  liquid_2: 100
+  liquidmin_3: 150
+  liquidmax_3: 200
+  lagerumschlag: 3
+  debitorenzahlungsfrist: 30
+  fremdfinanzierungsgradmin: 40
+  fremdfinanzierungsgradmax: 70
+  eigenfinanzierungsgradmin: 30
+  eigenfinanzierungsgradmax: 60
+  anlagedeckungsgradmin_1: 75
+  anlagedeckungsgradmax_1: 100
+  anlagedeckungsgrad_2: 100
