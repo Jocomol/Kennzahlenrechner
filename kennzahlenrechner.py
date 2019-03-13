@@ -41,7 +41,15 @@ class Main():
         print("WIP")
         #TODO
 
+    def gesamtkapitalrent():
+        reingewinn = self.bilanz_yaml["Erfolgsrechnung"]["gewinn"]
+        zinsen = self.bilanz_yaml["Erfolgsrechnung"]["Aufwand"]["zinsen"]
+        gesamtkapital = self.self.bilanz_yaml["Bilanz"]["gesamtvermögen"]
+        resultat = (reingewinn + zinsen) * 100 / gesamtkapital
+        print (resultat)
+
 
 if __name__ == "__main__":
     programm = Main()
+    gesamtkapitalrent()
     x = input("press enter to end")
