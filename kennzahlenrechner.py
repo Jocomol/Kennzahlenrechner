@@ -37,14 +37,14 @@ class Main():
         self.selbstfinanzierungsgrad = self.bilanz_yaml["Bemerkungen"]["selbstfinanzierungsgrad"]
 
 
-    def validate_bilanz():
+    def validate_bilanz(self):
         print("WIP")
         #TODO
 
-    def gesamtkapitalrent():
+    def cal_gesamtkapitalrent(self):
         reingewinn = self.bilanz_yaml["Erfolgsrechnung"]["gewinn"]
         zinsen = self.bilanz_yaml["Erfolgsrechnung"]["Aufwand"]["zinsen"]
-        gesamtkapital = self.self.bilanz_yaml["Bilanz"]["gesamtvermögen"]
+        gesamtkapital = self.bilanz_yaml["Bilanz"]["gesamtvermoegen"]
         resultat = (reingewinn + zinsen) * 100 / gesamtkapital
         if resultat >= 5:
             print(colorful.green("Die Gesamtkapitalrentabilität liegt bei " + resultat +"%."))
@@ -54,5 +54,5 @@ class Main():
 
 if __name__ == "__main__":
     programm = Main()
-    gesamtkapitalrent()
+    programm.cal_gesamtkapitalrent()
     x = input("press enter to end")
