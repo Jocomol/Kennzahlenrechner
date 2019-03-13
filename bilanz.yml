@@ -10,8 +10,10 @@ Bilanz:
       immobilien: 300
   Passiven:
     Fremdkapital:
-      Kreditoren: 200
-      Bankschuld: 100 #falls Keine Bankschuld vorhanden ist, wert auf NULL setzen
+    Kurzfristiges_FK:
+        Kreditoren: 200
+        Bankschuld: 100 #falls Keine Bankschuld vorhanden ist, wert auf NULL setzen
+    Langfristiges_FK:
       Darlehen: 50
       Hypotheken: 200
     Eigenkapital:

@@ -46,10 +46,25 @@ class Main():
         zinsen = self.bilanz_yaml["Erfolgsrechnung"]["Aufwand"]["zinsen"]
         gesamtkapital = self.bilanz_yaml["Bilanz"]["gesamtvermoegen"]
         resultat = (reingewinn + zinsen) * 100 / gesamtkapital
-        if resultat >= 5:
+        if resultat >= self.gesamtkapitalrent:
             print(colorful.green("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) +"%."))
         else:
             print(colorful.red("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) +"%. Sie ist damit NICHT gewährleistet."))
+
+    def cal_liquiditaetsgrad1(self):
+        liquide_mittel = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermögen"]["liquide_mittel"]
+        kurzfristiges_FK = 0
+        for kf_fk in self.bilanz_yaml["Bilanz"]["Fremdkapital"]["Kurzfristiges_FK"]:
+            kurzfristiges_FK = kurzfristiges_FK + kf_fk
+        resultat = liquide_mittel * 100 / kurzfristiges_FK
+        if resultat >= self.liquidmin_1 and resultat <= self.liquidmax_1:
+            print(colorful.green("Der Liquiditätsgrad_1 liegt bei " + str(resultat) +"%."))
+        elif resultat < self.liquidmin_1:
+            print(colorful.red("Der Liquiditätsgrad_1 liegt bei " + str(resultat) +"%. Dies ist zu tief"))
+        elif resultat > self.liquidmin_1:
+            print(colorful.red("Der Liquiditätsgrad_1 liegt bei " + str(resultat) +"%. Dies ist zu hoch"))
+        else:
+            print(colorful.red("Ein Fehler ist unterlaufen"))
 
 
 if __name__ == "__main__":
