@@ -9,7 +9,6 @@ class Main():
             with open("./std_kennzahlen.yml", 'r') as stream:
                 self.std_kennzahlen_yaml = yaml.load(stream)
             with open("./bilanz.yml", 'r') as stream:
-                print("fff")
                 self.bilanz_yaml = yaml.load(stream)
         except Exception as e:
             print(colorful.bold_red(e))
