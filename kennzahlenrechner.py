@@ -36,10 +36,9 @@ class Main():
         self.anlagenintensitaet = self.bilanz_yaml["Bemerkungen"]["anlagenintensitaet"]
         self.selbstfinanzierungsgrad = self.bilanz_yaml["Bemerkungen"]["selbstfinanzierungsgrad"]
 
-
     def validate_bilanz(self):
         print("WIP")
-        #TODO
+        # TODO
 
     def cal_gesamtkapitalrent(self):
         reingewinn = self.bilanz_yaml["Erfolgsrechnung"]["gewinn"]
@@ -47,22 +46,22 @@ class Main():
         gesamtkapital = self.bilanz_yaml["Bilanz"]["gesamtvermoegen"]
         resultat = (reingewinn + zinsen) * 100 / gesamtkapital
         if resultat >= self.gesamtkapitalrent:
-            print(colorful.green("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) +"%."))
+            print(colorful.green("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) + "%."))
         else:
-            print(colorful.red("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) +"%. Sie ist damit NICHT gewährleistet."))
+            print(colorful.red("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) + "%. Sie ist damit NICHT gewährleistet."))
 
     def cal_liquiditaetsgrad1(self):
         liquide_mittel = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermoegen"]["liquide_mittel"]
         kurzfristiges_FK = 0
-        for kf_fk in self.bilanz_yaml["Bilanz"]["Passiven"]["Fremdkapital"]["Kurzfristiges_FK"]:
+        for kf_fk in self.bilanz_yaml['Bilanz']['Passiven']['Fremdkapital']['Kurzfristiges_FK'].values():
             kurzfristiges_FK = kurzfristiges_FK + kf_fk
         resultat = liquide_mittel * 100 / kurzfristiges_FK
         if resultat >= self.liquidmin_1 and resultat <= self.liquidmax_1:
-            print(colorful.green("Der Liquiditätsgrad_1 liegt bei " + str(resultat) +"%."))
+            print(colorful.green("Der Liquiditätsgrad_1 liegt bei " + str(resultat) + "%."))
         elif resultat < self.liquidmin_1:
-            print(colorful.red("Der Liquiditätsgrad_1 liegt bei " + str(resultat) +"%. Dies ist zu tief"))
+            print(colorful.red("Der Liquiditätsgrad_1 liegt bei " + str(resultat) + "%. Dies ist zu tief"))
         elif resultat > self.liquidmin_1:
-            print(colorful.red("Der Liquiditätsgrad_1 liegt bei " + str(resultat) +"%. Dies ist zu hoch"))
+            print(colorful.red("Der Liquiditätsgrad_1 liegt bei " + str(resultat) + "%. Dies ist zu hoch"))
         else:
             print(colorful.red("Ein Fehler ist unterlaufen"))
 
@@ -71,4 +70,3 @@ if __name__ == "__main__":
     programm = Main()
     programm.cal_gesamtkapitalrent()
     programm.cal_liquiditaetsgrad1()
-    x = input("press enter to end")
