@@ -1,10 +1,12 @@
 import colorful
-import yaml
+import sys
+import ruamel.yaml
 
 
 class Main():
 
     def __init__(self):
+        yaml = ruamel.yaml.YAML(typ='safe')
         try:
             with open("./std_kennzahlen.yml", 'r') as stream:
                 self.std_kennzahlen_yaml = yaml.load(stream)
@@ -12,6 +14,8 @@ class Main():
                 self.bilanz_yaml = yaml.load(stream)
         except Exception as e:
             print(colorful.bold_red(e))
+
+        # Standart Kennzahlen
         self.eigenkapitalrent = self.std_kennzahlen_yaml["kennzahlen"]["eigenkapitalrent"]
         self.gesamtkapitalrent = self.std_kennzahlen_yaml["kennzahlen"]["gesamtkapitalrent"]
         self.liquidmin_1 = self.std_kennzahlen_yaml["kennzahlen"]["liquidmin_1"]
@@ -28,6 +32,7 @@ class Main():
         self.anlagedeckungsgradmax_1 = self.std_kennzahlen_yaml["kennzahlen"]["anlagedeckungsgradmax_1"]
         self.anlagedeckungsgrad_2 = self.std_kennzahlen_yaml["kennzahlen"]["anlagedeckungsgrad_2"]
 
+        # Options
         self.geschäftsform = self.bilanz_yaml["Bemerkungen"]["geschäftsform"]
         self.vorraete_anfangs_jahr = self.bilanz_yaml["Bemerkungen"]["vorraete_anfangs_jahr"]
         self.debitorenstand_anfangs_jahr = self.bilanz_yaml["Bemerkungen"]["debitorenstand_anfangs_jahr"]
@@ -36,15 +41,17 @@ class Main():
         self.anlagenintensitaet = self.bilanz_yaml["Bemerkungen"]["anlagenintensitaet"]
         self.selbstfinanzierungsgrad = self.bilanz_yaml["Bemerkungen"]["selbstfinanzierungsgrad"]
 
+        # Bilanz
+        self.reingewinn = self.bilanz_yaml["Erfolgsrechnung"]["gewinn"]
+        self.zinsen = self.bilanz_yaml["Erfolgsrechnung"]["Aufwand"]["zinsen"]
+        self.gesamtkapital = self.bilanz_yaml["Bilanz"]["gesamtvermoegen"]
+
     def validate_bilanz(self):
         print("WIP")
         # TODO
 
     def cal_gesamtkapitalrent(self):
-        reingewinn = self.bilanz_yaml["Erfolgsrechnung"]["gewinn"]
-        zinsen = self.bilanz_yaml["Erfolgsrechnung"]["Aufwand"]["zinsen"]
-        gesamtkapital = self.bilanz_yaml["Bilanz"]["gesamtvermoegen"]
-        resultat = (reingewinn + zinsen) * 100 / gesamtkapital
+        resultat = (self.reingewinn + self.zinsen) * 100 / self.gesamtkapital
         if resultat >= self.gesamtkapitalrent:
             print(colorful.green("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) + "%."))
         else:
@@ -65,8 +72,21 @@ class Main():
         else:
             print(colorful.red("Ein Fehler ist unterlaufen"))
 
+    def cal_liquiditaetsgrad2(self):
+        liquide_mittel = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermoegen"]["liquide_mittel"]
+        kurzfristiges_FK = 0
+        for kf_fk in self.bilanz_yaml['Bilanz']['Passiven']['Fremdkapital']['Kurzfristiges_FK'].values():
+            kurzfristiges_FK = kurzfristiges_FK + kf_fk
+        forderungen = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermoegen"]["debitoren"]
+        resultat = (liquide_mittel + forderungen) * 100 / kurzfristiges_FK
+        if resultat >= self.liquidmin_2:
+            print(colorful.green("Der Liquiditätsgrad_2 liegt bei " + str(resultat) + "%."))
+        else:
+            print(colorful.red("Der Liquiditätsgrad_2 liegt bei " + str(resultat) + "%. Dies ist zu tief"))
+
 
 if __name__ == "__main__":
     programm = Main()
     programm.cal_gesamtkapitalrent()
     programm.cal_liquiditaetsgrad1()
+    programm.cal_liquiditaetsgrad2()
