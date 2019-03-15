@@ -79,7 +79,7 @@ class Main():
             kurzfristiges_FK = kurzfristiges_FK + kf_fk
         forderungen = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermoegen"]["debitoren"]
         resultat = (liquide_mittel + forderungen) * 100 / kurzfristiges_FK
-        if resultat >= self.liquidmin_2:
+        if resultat >= self.liquid_2:
             print(colorful.green("Der Liquiditätsgrad_2 liegt bei " + str(resultat) + "%."))
         else:
             print(colorful.red("Der Liquiditätsgrad_2 liegt bei " + str(resultat) + "%. Dies ist zu tief"))
