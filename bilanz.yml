@@ -1,9 +1,9 @@
 Bilanz:
-  gesamtvermoegen: 1000
+  GESAMTVERMOEGEN: 1000
   Aktiven:
     Umlaufvermoegen:
-      liquide_mittel: 100
-      debitoren: 250
+      LIQUIDE_MITTEL: 100
+      DEBITOREN: 250
       vorraete: 250
     Anlagevermoegen:
       mobiliar: 100
@@ -12,7 +12,7 @@ Bilanz:
     Fremdkapital:
       Kurzfristiges_FK:
         Kreditoren: 200
-        Bankschuld: 100 #falls Keine Bankschuld vorhanden ist, wert auf NULL setzen
+        Bankschuld: 100
       Langfristiges_FK:
         Darlehen: 50
         Hypotheken: 200
@@ -22,13 +22,13 @@ Bilanz:
       gewinnvortrag: 50
 
 Erfolgsrechnung:
-  gewinn: 50
-  verlust: NULL
+  GEWINN: 50
+  VERLUST: NULL
   Aufwand:
     personal: 850
     warenaufwand: 450
     miete: 135
-    zinsen: 15
+    ZINSEN: 15
     abschreibungen: 70
     unterhalt: 120
     werbung: 170
