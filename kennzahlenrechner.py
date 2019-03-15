@@ -75,10 +75,10 @@ class Main():
 
     def check_kennzahl(self, wert, name, resultat):
         resultat = round(resultat, 2)
-         if resultat >= wert:
-             print(name, colorful.green(str(resultat) + "% ") + "[" + colorful.green("OK") + "]", "Richtwert: " + str(wert) + "%")
-         else:
-             print(name, colorful.red(str(resultat) + "% ") + "[" + colorful.red("Nicht Genug") + "]", "Richtwert: " + str(wert) + "%")
+        if resultat >= wert:
+            print(name, colorful.green(str(resultat) + "% ") + "[" + colorful.green("OK") + "]", "Richtwert: " + str(wert) + "%")
+        else:
+            print(name, colorful.red(str(resultat) + "% ") + "[" + colorful.red("Nicht Genug") + "]", "Richtwert: " + str(wert) + "%")
 
     def cal_gesamtkapitalrent(self):
         resultat = (self.reingewinn + self.zinsen) * 100 / self.gesamtkapital
@@ -86,15 +86,15 @@ class Main():
 
     def cal_liquiditaetsgrad1(self):
         resultat = self.liquide_mittel * 100 / self.kurzfristiges_FK
-        self.check_kennzahl_range(self.liquidmin_1, self.liquidmax_1, "Liquiditätsgrad 1", resultat)
+        self.check_kennzahl_range(self.liquidmin_1, self.liquidmax_1, "Liquiditätsgrad I", resultat)
 
     def cal_liquiditaetsgrad2(self):
         resultat = (self.liquide_mittel + self.forderungen) * 100 / self.kurzfristiges_FK
-        self.check_kennzahl(self.liquid_2, "Liquiditätsgrad 2", resultat)
+        self.check_kennzahl(self.liquid_2, "Liquiditätsgrad II", resultat)
 
     def cal_liquiditaetsgrad3(self):
         resultat = self.umlaufvermoegen * 100 / self.kurzfristiges_FK
-        self.check_kennzahl_range(self.liquidmin_3, self.liquidmax_3, "Liquiditätsgrad 3", resultat)
+        self.check_kennzahl_range(self.liquidmin_3, self.liquidmax_3, "Liquiditätsgrad III", resultat)
 
     def cal_eigenkapitalrentabilitaet(self):
         resultat = self.reingewinn * 100 / (self.eigenkapital - self.reingewinn)
