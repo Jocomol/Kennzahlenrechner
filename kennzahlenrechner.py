@@ -16,9 +16,12 @@ class Main():
             print(colorful.bold_red(e))
 
         # Standart Kennzahlen
-        self.eigenkapitalrent = self.std_kennzahlen_yaml["kennzahlen"]["eigenkapitalrent"]
-        self.gesamtkapitalrent = self.std_kennzahlen_yaml["kennzahlen"]["gesamtkapitalrent"]
-        self.liquidmin_1 = self.std_kennzahlen_yaml["kennzahlen"]["liquidmin_1"]
+        self.eigenkapitalrent =
+            self.std_kennzahlen_yaml["kennzahlen"]["eigenkapitalrent"]
+        self.gesamtkapitalrent =
+            self.std_kennzahlen_yaml["kennzahlen"]["gesamtkapitalrent"]
+        self.liquidmin_1 =
+            self.std_kennzahlen_yaml["kennzahlen"]["liquidmin_1"]
         self.liquidmax_1 = self.std_kennzahlen_yaml["kennzahlen"]["liquidmax_1"]
         self.liquid_2 = self.std_kennzahlen_yaml["kennzahlen"]["liquid_2"]
         self.liquidmin_3 = self.std_kennzahlen_yaml["kennzahlen"]["liquidmin_3"]
