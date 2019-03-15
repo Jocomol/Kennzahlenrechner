@@ -72,12 +72,15 @@ class Main():
         else:
             print(name, colorful.red(str(resultat) + "% ") + "[" + colorful.red("ERROR") + "]", "Min: " + str(min) + "% Max: " + str(max) + "%")
 
+    def check_kennzahl(self, wert, name, resultat):
+         if resultat >= wert:
+             print(name, colorful.green(str(resultat) + "% ") + "[" + colorful.green("OK") + "]", "Richtwert: " + str(wert) + "%")
+         else:
+             print(name, colorful.red(str(resultat) + "% ") + "[" + colorful.red("Nicht Genug") + "]", "Richtwert: " + str(wert) + "%")
+
     def cal_gesamtkapitalrent(self):
         resultat = (self.reingewinn + self.zinsen) * 100 / self.gesamtkapital
-        if resultat >= self.gesamtkapitalrent:
-            print(colorful.green("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) + "%."))
-        else:
-            print(colorful.red("Die Gesamtkapitalrentabilität liegt bei " + str(resultat) + "%. Sie ist damit NICHT gewährleistet."))
+        self.check_kennzahl(self.gesamtkapitalrent, "Gesamtkapitalrentabilität", resultat)
 
     def cal_liquiditaetsgrad1(self):
         resultat = self.liquide_mittel * 100 / self.kurzfristiges_FK
@@ -85,10 +88,7 @@ class Main():
 
     def cal_liquiditaetsgrad2(self):
         resultat = (self.liquide_mittel + self.forderungen) * 100 / self.kurzfristiges_FK
-        if resultat >= self.liquid_2:
-            print(colorful.green("Der Liquiditätsgrad_2 liegt bei " + str(resultat) + "%."))
-        else:
-            print(colorful.red("Der Liquiditätsgrad_2 liegt bei " + str(resultat) + "%. Dies ist zu tief"))
+        self.check_kennzahl(self.liquid_2, "Liquiditätsgrad 2", resultat)
 
     def cal_liquiditaetsgrad3(self):
         resultat = self.umlaufvermoegen * 100 / self.kurzfristiges_FK
@@ -96,10 +96,7 @@ class Main():
 
     def cal_eigenkapitalrentabilitaet(self):
         resultat = self.reingewinn * 100 / (self.eigenkapital - self.reingewinn)
-        if resultat >= self.eigenkapitalrent:
-            print(colorful.green("Die Eigenkapitalrentabilität liegt bei " + str(resultat) + "%."))
-        else:
-            print(colorful.red("Die Eigenkapitalrentabilität bei " + str(resultat) + "%. Dies ist zu tief"))
+        self.check_kennzahl(self.eigenkapitalrent, "Eigenkapitalrentabilität", resultat)
 
 
 if __name__ == "__main__":
