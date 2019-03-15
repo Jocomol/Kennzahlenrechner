@@ -22,6 +22,7 @@ class Main():
         self.liquidmax_1 = self.std_kennzahlen_yaml["kennzahlen"]["liquidmax_1"]
         self.liquid_2 = self.std_kennzahlen_yaml["kennzahlen"]["liquid_2"]
         self.liquidmin_3 = self.std_kennzahlen_yaml["kennzahlen"]["liquidmin_3"]
+        self.liquidmax_3 = self.std_kennzahlen_yaml["kennzahlen"]["liquidmax_3"]
         self.lagerumschlag = self.std_kennzahlen_yaml["kennzahlen"]["lagerumschlag"]
         self.debitorenzahlungsfrist = self.std_kennzahlen_yaml["kennzahlen"]["debitorenzahlungsfrist"]
         self.fremdfinanzierungsgradmin = self.std_kennzahlen_yaml["kennzahlen"]["fremdfinanzierungsgradmin"]
@@ -46,13 +47,13 @@ class Main():
         self.zinsen = self.bilanz_yaml["Erfolgsrechnung"]["Aufwand"]["ZINSEN"]
         self.gesamtkapital = self.bilanz_yaml["Bilanz"]["GESAMTVERMOEGEN"]
         self.liquide_mittel = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermoegen"]["LIQUIDE_MITTEL"]
-        forderungen = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermoegen"]["DEBITOREN"]
+        self.forderungen = self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermoegen"]["DEBITOREN"]
         self.kurzfristiges_FK = 0
         for kf_fk in self.bilanz_yaml['Bilanz']['Passiven']['Fremdkapital']['Kurzfristiges_FK'].values():
             self.kurzfristiges_FK += kf_fk
         self.eigenkapital = 0
-        for ek in self.bilanz_yaml['Bilanz']['Passiven']['Eigenkapitalkapital'].values():
-             self.eigenkapital += ek
+        for ek in self.bilanz_yaml['Bilanz']['Passiven']['Eigenkapital'].values():
+            self.eigenkapital += ek
         self.umlaufvermoegen = 0
         for uv in self.bilanz_yaml["Bilanz"]["Aktiven"]["Umlaufvermoegen"].values():
             self.umlaufvermoegen += uv
@@ -61,15 +62,15 @@ class Main():
         print("WIP")
         # TODO
 
-    def check_kennzahl_range(self, min, max, name, zahl):
+    def check_kennzahl_range(self, min, max, name, resultat):
         if resultat >= min and resultat <= max:
-            print(name + colorful.green(str(resultat) + "% ") + "[" + colorful.green(OK) + "]" + "Min: " + min + "% Max: " + max + "%")
+            print(name, colorful.green(str(resultat) + "% ") + "[" + colorful.green("OK") + "]", "Min: " + str(min) + "% Max: " + str(max) + "%")
         elif resultat < min:
-            print(name + colorful.red(str(resultat) + "% ") + "[" + colorful.red(Zu Tief) + "]" + "Min: " + min + "% Max: " + max + "%")
+            print(name, colorful.red(str(resultat) + "% ") + "[" + colorful.red("Zu Tief") + "]", "Min: " + str(min) + "% Max: " + str(max) + "%")
         elif resultat > max:
-            print(name + colorful.red(str(resultat) + "% ") + "[" + colorful.red(Zu Hoch) + "]" + "Min: " + min + "% Max: " + max + "%")
+            print(name, colorful.red(str(resultat) + "% ") + "[" + colorful.red("Zu Hoch") + "]", "Min: " + str(min) + "% Max: " + str(max) + "%")
         else:
-            print(name + colorful.red(str(resultat) + "% ") + "[" + colorful.red(ERROR) + "]" + "Min: " + min + "% Max: " + max + "%")
+            print(name, colorful.red(str(resultat) + "% ") + "[" + colorful.red("ERROR") + "]", "Min: " + str(min) + "% Max: " + str(max) + "%")
 
     def cal_gesamtkapitalrent(self):
         resultat = (self.reingewinn + self.zinsen) * 100 / self.gesamtkapital
@@ -90,7 +91,7 @@ class Main():
             print(colorful.red("Der Liquiditätsgrad_2 liegt bei " + str(resultat) + "%. Dies ist zu tief"))
 
     def cal_liquiditaetsgrad3(self):
-        resultat = self.umlaufvermögen * 100 / self.kurzfristiges_FK
+        resultat = self.umlaufvermoegen * 100 / self.kurzfristiges_FK
         self.check_kennzahl_range(self.liquidmin_3, self.liquidmax_3, "Liquiditätsgrad 3", resultat)
 
     def cal_eigenkapitalrentabilitaet(self):
@@ -99,6 +100,7 @@ class Main():
             print(colorful.green("Die Eigenkapitalrentabilität liegt bei " + str(resultat) + "%."))
         else:
             print(colorful.red("Die Eigenkapitalrentabilität bei " + str(resultat) + "%. Dies ist zu tief"))
+
 
 if __name__ == "__main__":
     programm = Main()
