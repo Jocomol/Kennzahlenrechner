@@ -14,8 +14,13 @@ Bilanz:
         Kreditoren: 200
         Bankschuld: 100 #falls Keine Bankschuld vorhanden ist, wert auf NULL setzen
       Langfristiges_FK:
+<<<<<<< HEAD
         Darlehen: 50
         Hypotheken: 200
+=======
+      Darlehen: 50
+      Hypotheken: 200
+>>>>>>> 66ef6fdb2f82ae41deb4f9849ce1c7d877617a80
     Eigenkapital:
       aktienkapital: 300
       reserven: 100
