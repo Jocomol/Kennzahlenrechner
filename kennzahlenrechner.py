@@ -63,6 +63,7 @@ class Main():
         # TODO
 
     def check_kennzahl_range(self, min, max, name, resultat):
+        resultat = round(resultat, 2)
         if resultat >= min and resultat <= max:
             print(name, colorful.green(str(resultat) + "% ") + "[" + colorful.green("OK") + "]", "Min: " + str(min) + "% Max: " + str(max) + "%")
         elif resultat < min:
@@ -73,6 +74,7 @@ class Main():
             print(name, colorful.red(str(resultat) + "% ") + "[" + colorful.red("ERROR") + "]", "Min: " + str(min) + "% Max: " + str(max) + "%")
 
     def check_kennzahl(self, wert, name, resultat):
+        resultat = round(resultat, 2)
          if resultat >= wert:
              print(name, colorful.green(str(resultat) + "% ") + "[" + colorful.green("OK") + "]", "Richtwert: " + str(wert) + "%")
          else:
@@ -101,8 +103,8 @@ class Main():
 
 if __name__ == "__main__":
     programm = Main()
+    programm.cal_eigenkapitalrentabilitaet()
     programm.cal_gesamtkapitalrent()
     programm.cal_liquiditaetsgrad1()
     programm.cal_liquiditaetsgrad2()
-    programm.cal_eigenkapitalrentabilitaet()
     programm.cal_liquiditaetsgrad3()
