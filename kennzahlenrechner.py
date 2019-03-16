@@ -1,5 +1,4 @@
 import colorful
-import sys
 import ruamel.yaml
 
 
@@ -337,27 +336,29 @@ class Main():
             resultat)
 
     def cal_selbstfinanzierungsgrad(self):
-        if self.geschaeftsform is "KOLLEKT":
-            if self.benutzername is not NULL:
+        if self.geschaeftsform == "KOLLEKT":
+            if self.benutzername is not None:
                 grundkapital = self.bilanz_yaml[
                     "Bilanz"][
                     "Passiven"][
                     "Eigenkapital"][
                     self.benutzername]
-                    anderes_eigen = 0
-                    for mb in self.bilanz_yaml[
-                            "Bemerkungen"][
-                            "Mitbesitzer"].values():
-                        if mb is not NULL:
-                            anderes_eigen += self.bilanz_yaml[
-                                "Bilanz"][
-                                "Passiven"][
-                                "Eigenkapital"][
-                                mb]
-                        else:
-                            print(colorful.red("Keine Konten gefunden"))
-                    zuwachskapital = self.eigenkapital - (grundkapital + anderes_eigen)
-                    resultat = zuwachskapital * 100 / grundkapital
+                anderes_eigen = 0
+                for mb in self.bilanz_yaml[
+                        "Bemerkungen"][
+                        "Mitbesitzer"].values():
+                    if mb is not None:
+                        anderes_eigen += self.bilanz_yaml[
+                            "Bilanz"][
+                            "Passiven"][
+                            "Eigenkapital"][
+                            mb]
+                    else:
+                        print(colorful.red("Keine Konten gefunden"))
+                zuwachskapital = self.eigenkapital - (
+                            grundkapital +
+                            anderes_eigen)
+                resultat = zuwachskapital * 100 / grundkapital
             else:
                 print(
                     colorful.red(
@@ -365,19 +366,19 @@ class Main():
                         self.benutzername,
                         "konnte nicht gefunden werden"))
         else:
-            if self.geschaeftsform is "AG":
+            if self.geschaeftsform == "AG":
                 grundkapital = self.bilanz_yaml[
                     "Bilanz"][
                     "Passiven"][
                     "Eigenkapital"][
                     "AKTIENKAPITAL"]
-            elif self.geschaeftsform is "Einzel":
+            elif self.geschaeftsform == "Einzel":
                 grundkapital = self.bilanz_yaml[
                     "Bilanz"][
                     "Passiven"][
                     "Eigenkapital"][
                     "EIGENKAPITAL"]
-            elif self.geschaeftsform is "GMBH":
+            elif self.geschaeftsform == "GMBH":
                 grundkapital = self.bilanz_yaml[
                     "Bilanz"][
                     "Passiven"][
@@ -386,10 +387,9 @@ class Main():
             else:
                 print(
                     colorful.red(
-                        "Die Geschäftsform:",
-                        self.geschaeftsform,
-                        "ist ungültig"))
-                        break
+                        "Die Geschäftsform: " +
+                        str(self.geschaeftsform) +
+                        " ist ungültig"))
             zuwachskapital = self.eigenkapital - grundkapital
             resultat = zuwachskapital * 100 / grundkapital
 
@@ -397,6 +397,7 @@ class Main():
             self.selbstfinanzierungsgrad,
             "Selbstfinanierungsgrad",
             resultat)
+
 
 if __name__ == "__main__":
     programm = Main()
