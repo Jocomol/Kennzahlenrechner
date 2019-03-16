@@ -133,6 +133,12 @@ class Main():
                 "Erfolgsrechnung"][
                 "Ertrag"].values():
             self.ertrag += er
+        self.fremdkapital = 0
+        for fk in self.bilanz_yaml[ # Maybe doesn't work
+                "Bilanz"][
+                "Passiven"][
+                "Fremdkapital"].values():
+            self.fremdkapital += fk
 
     def validate_bilanz(self):
         print("WIP")
@@ -228,6 +234,14 @@ class Main():
             "Kapitalumschlag",
             resultat)
 
+    def cal_fremdfinanzierungsgrad(self):
+        resultat = self.fremdkapital * 100 / self.gesamtkapital
+        self.check_kennzahl_range(
+            self.fremdfinanzierungsgradmin,
+            fremdfinanzierungsgradmax,
+            "Fremdfinanierungsgrad",
+            resultat)
+
 
 if __name__ == "__main__":
     programm = Main()
@@ -238,3 +252,4 @@ if __name__ == "__main__":
     programm.cal_liquiditaetsgrad3()
     programm.cal_umsatzrentabilitaet()
     programm.cal_kapitalumschlag()
+    programm.cal_fremdfinanzierungsgrad()
