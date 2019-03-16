@@ -128,6 +128,11 @@ class Main():
                 "Aktiven"][
                 "Umlaufvermoegen"].values():
             self.umlaufvermoegen += uv
+        self.ertrag = 0
+        for er in self.bilanz_yaml[
+                "Erfolgsrechnung"][
+                "Ertrag"].values():
+            self.ertrag += er
 
     def validate_bilanz(self):
         print("WIP")
@@ -209,6 +214,20 @@ class Main():
             "Eigenkapitalrentabilität",
             resultat)
 
+    def cal_umsatzrentabilitaet(self):
+        resultat = self.reingewinn * 100 / self.ertrag
+        self.check_kennzahl(
+            self.umsatzrentabilitaet,
+            "Umsatzrentablilität",
+            resultat)
+
+    def cal_kapitalumschlag(self):
+        resultat = self.ertrag / self.gesamtkapital
+        self.check_kennzahl(
+            self.kapitalumschlag,
+            "Kapitalumschlag",
+            resultat)
+
 
 if __name__ == "__main__":
     programm = Main()
@@ -217,3 +236,5 @@ if __name__ == "__main__":
     programm.cal_liquiditaetsgrad1()
     programm.cal_liquiditaetsgrad2()
     programm.cal_liquiditaetsgrad3()
+    programm.cal_umsatzrentabilitaet()
+    programm.cal_kapitalumschlag()
