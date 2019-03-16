@@ -66,9 +66,9 @@ class Main():
             "anlagedeckungsgrad_2"]
 
         # Options
-        self.geschäftsform = self.bilanz_yaml[
+        self.geschaeftsform = self.bilanz_yaml[
             "Bemerkungen"][
-            "geschäftsform"]
+            "geschaeftsform"]
         self.vorraete_anfangs_jahr = self.bilanz_yaml[
             "Bemerkungen"][
             "vorraete_anfangs_jahr"]
@@ -87,6 +87,9 @@ class Main():
         self.selbstfinanzierungsgrad = self.bilanz_yaml[
             "Bemerkungen"][
             "selbstfinanzierungsgrad"]
+        self.benutzername = self.bilanz_yaml[
+            "Bemerkungen"][
+            "benutzername"]
 
         # Bilanz
         self.reingewinn = self.bilanz_yaml[
@@ -109,6 +112,20 @@ class Main():
             "Aktiven"][
             "Umlaufvermoegen"][
             "DEBITOREN"]
+        self.vorraete = self.bilanz_yaml[
+            "Bilanz"][
+            "Aktiven"][
+            "Umlaufvermoegen"][
+            "VORRAETE"]
+        self.warenaufwand = self.bilanz_yaml[
+            "Erfolgsrechnung"][
+            "Aufwand"][
+            "WARENAUFWAND"]
+        self.verkaufserloes = self.bilanz_yaml[
+            "Erfolgsrechnung"][
+            "Ertrag"][
+            "VERKAUFSERLOES"]
+
         self.kurzfristiges_FK = 0
         for kf_fk in self.bilanz_yaml[
                 'Bilanz'][
@@ -116,23 +133,27 @@ class Main():
                 'Fremdkapital'][
                 'Kurzfristiges_FK'].values():
             self.kurzfristiges_FK += kf_fk
+
         self.eigenkapital = 0
         for ek in self.bilanz_yaml[
                 'Bilanz'][
                 'Passiven'][
                 'Eigenkapital'].values():
             self.eigenkapital += ek
+
         self.umlaufvermoegen = 0
         for uv in self.bilanz_yaml[
                 "Bilanz"][
                 "Aktiven"][
                 "Umlaufvermoegen"].values():
             self.umlaufvermoegen += uv
+
         self.ertrag = 0
         for er in self.bilanz_yaml[
                 "Erfolgsrechnung"][
                 "Ertrag"].values():
             self.ertrag += er
+
         self.fremdkapital = 0
         for fk in self.bilanz_yaml[
                 "Bilanz"][
@@ -140,6 +161,28 @@ class Main():
                 "Fremdkapital"].values():
             for ffk in fk.values():
                 self.fremdkapital += ffk
+
+        self.eigenkapital = 0
+        for ek in self.bilanz_yaml[
+                "Bilanz"][
+                "Passiven"][
+                "Eigenkapital"].values():
+            self.eigenkapital += ek
+
+        self.anlagevermoegen = 0
+        for av in self.bilanz_yaml[
+                "Bilanz"][
+                "Aktiven"][
+                "Anlagevermoegen"].values():
+            self.anlagevermoegen += av
+
+        self.langfristigesFK = 0
+        for lffk in self.bilanz_yaml[
+                "Bilanz"][
+                "Passiven"][
+                "Fremdkapital"][
+                "Langfristiges_FK"].values():
+            self.langfristigesFK += lffk
 
     def validate_bilanz(self):
         print("WIP")
@@ -243,6 +286,117 @@ class Main():
             "Fremdfinanierungsgrad",
             resultat)
 
+    def cal_eigenfinanzierungsgrad(self):
+        resultat = self.eigenkapital * 100 / self.gesamtkapital
+        self.check_kennzahl_range(
+            self.eigenfinanzierungsgradmin,
+            self.eigenfinanzierungsgradmax,
+            "Eigenfinanzierungsgrad",
+            resultat)
+
+    def cal_anlageintensitaet(self):
+        resultat = self.anlagevermoegen * 100 / self.gesamtkapital
+        self.check_kennzahl(
+            self.anlagenintensitaet,
+            "Anlagevermögen",
+            resultat)
+
+    def cal_anlagedeckungsgrad1(self):
+        resultat = self.eigenkapital * 100 / self.anlagevermoegen
+        self.check_kennzahl_range(
+            self.anlagedeckungsgradmin_1,
+            self.anlagedeckungsgradmax_1,
+            "Anlagedeckungsgrad I",
+            resultat)
+
+    def cal_anlagedeckungsgrad2(self):
+        resultat = (
+            self.eigenkapital +
+            self.langfristigesFK) * 100 / self.anlagevermoegen
+        self.check_kennzahl(
+            self.anlagedeckungsgrad_2,
+            "Anlagedeckungsgrad II",
+            resultat)
+
+    def cal_lagerumschlag(self):
+        avg_warenvorrat = (self.vorraete + self.vorraete_anfangs_jahr) / 2
+        resultat = self.warenaufwand / avg_warenvorrat
+        self.check_kennzahl(
+            self.lagerumschlag,
+            "Lagerumschlag",
+            resultat)
+
+    def cal_debitorenzahlungsfrist(self):
+        avg_debitoren = (
+            self.forderungen +
+            self.debitorenstand_anfangs_jahr) / 2
+        resultat = avg_debitoren * 360 / self.verkaufserloes
+        self.check_kennzahl(
+            self.debitorenzahlungsfrist,
+            "Durchschnits-Debitorenzahlungsfrist",
+            resultat)
+
+    def cal_selbstfinanzierungsgrad(self):
+        if self.geschaeftsform is "KOLLEKT":
+            if self.benutzername is not NULL:
+                grundkapital = self.bilanz_yaml[
+                    "Bilanz"][
+                    "Passiven"][
+                    "Eigenkapital"][
+                    self.benutzername]
+                    anderes_eigen = 0
+                    for mb in self.bilanz_yaml[
+                            "Bemerkungen"][
+                            "Mitbesitzer"].values():
+                        if mb is not NULL:
+                            anderes_eigen += self.bilanz_yaml[
+                                "Bilanz"][
+                                "Passiven"][
+                                "Eigenkapital"][
+                                mb]
+                        else:
+                            print(colorful.red("Keine Konten gefunden"))
+                    zuwachskapital = self.eigenkapital - (grundkapital + anderes_eigen)
+                    resultat = zuwachskapital * 100 / grundkapital
+            else:
+                print(
+                    colorful.red(
+                        "Das Konto",
+                        self.benutzername,
+                        "konnte nicht gefunden werden"))
+        else:
+            if self.geschaeftsform is "AG":
+                grundkapital = self.bilanz_yaml[
+                    "Bilanz"][
+                    "Passiven"][
+                    "Eigenkapital"][
+                    "AKTIENKAPITAL"]
+            elif self.geschaeftsform is "Einzel":
+                grundkapital = self.bilanz_yaml[
+                    "Bilanz"][
+                    "Passiven"][
+                    "Eigenkapital"][
+                    "EIGENKAPITAL"]
+            elif self.geschaeftsform is "GMBH":
+                grundkapital = self.bilanz_yaml[
+                    "Bilanz"][
+                    "Passiven"][
+                    "Eigenkapital"][
+                    "STAMMKAPITAL"]
+            else:
+                print(
+                    colorful.red(
+                        "Die Geschäftsform:",
+                        self.geschaeftsform,
+                        "ist ungültig"))
+                        break
+            zuwachskapital = self.eigenkapital - grundkapital
+            resultat = zuwachskapital * 100 / grundkapital
+
+        self.check_kennzahl(
+            self.selbstfinanzierungsgrad,
+            "Selbstfinanierungsgrad",
+            resultat)
 
 if __name__ == "__main__":
     programm = Main()
@@ -254,3 +408,10 @@ if __name__ == "__main__":
     programm.cal_umsatzrentabilitaet()
     programm.cal_kapitalumschlag()
     programm.cal_fremdfinanzierungsgrad()
+    programm.cal_eigenfinanzierungsgrad()
+    programm.cal_anlageintensitaet()
+    programm.cal_anlagedeckungsgrad1()
+    programm.cal_anlagedeckungsgrad2()
+    programm.cal_lagerumschlag()
+    programm.cal_debitorenzahlungsfrist()
+    programm.cal_selbstfinanzierungsgrad()

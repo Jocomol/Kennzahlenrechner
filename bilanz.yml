@@ -4,7 +4,7 @@ Bilanz:
     Umlaufvermoegen:
       LIQUIDE_MITTEL: 100
       DEBITOREN: 250
-      vorraete: 250
+      VORRAETE: 250
     Anlagevermoegen:
       mobiliar: 100
       immobilien: 300
@@ -17,16 +17,20 @@ Bilanz:
         Darlehen: 50
         Hypotheken: 200
     Eigenkapital:
-      aktienkapital: 300
+      AKTIENKAPITAL: 300
+      STAMMKAPITAL: 0
+      NAMEHIER_KAPITAL: 0
+      NAMEHIER2_KAPITAL: 0
+      EIGENKAPITAL: 0
       reserven: 100
       gewinnvortrag: 50
 
 Erfolgsrechnung:
   GEWINN: 50
-  VERLUST: NULL
+  VERLUST: 0
   Aufwand:
     personal: 850
-    warenaufwand: 450
+    WARENAUFWAND: 450
     miete: 135
     ZINSEN: 15
     abschreibungen: 70
@@ -35,13 +39,19 @@ Erfolgsrechnung:
     betriebsaufwand: 50
     anderer_aufwand: 90
   Ertrag:
-    verkaufserloes: 2000
+    VERKAUFSERLOES: 2000
 
 Bemerkungen:
-  geschäftsform: 'AG'
+  geschaeftsform: 'AG' # Einzel, AG, GMBH, KOLLEKT
   vorraete_anfangs_jahr: 0
   debitorenstand_anfangs_jahr: 250
   umsatzrentabilitaet: 2.5
   kapitalumschlag: 2
   anlagenintensitaet: 40
   selbstfinanzierungsgrad: 50
+  #Falls geschaeftsform aud "KOLLEKT" gesetzt muss man hier angeben welches Konto genuzt werden soll
+  benutzername: NULL
+  Mitbesitzer:
+    1: NULL
+    #1: FOO_KAPITAL
+    #2: BAR_KAPITAL
