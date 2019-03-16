@@ -134,11 +134,12 @@ class Main():
                 "Ertrag"].values():
             self.ertrag += er
         self.fremdkapital = 0
-        for fk in self.bilanz_yaml[ # Maybe doesn't work
+        for fk in self.bilanz_yaml[
                 "Bilanz"][
                 "Passiven"][
                 "Fremdkapital"].values():
-            self.fremdkapital += fk
+            for ffk in fk.values():
+                self.fremdkapital += ffk
 
     def validate_bilanz(self):
         print("WIP")
@@ -238,7 +239,7 @@ class Main():
         resultat = self.fremdkapital * 100 / self.gesamtkapital
         self.check_kennzahl_range(
             self.fremdfinanzierungsgradmin,
-            fremdfinanzierungsgradmax,
+            self.fremdfinanzierungsgradmax,
             "Fremdfinanierungsgrad",
             resultat)
 
