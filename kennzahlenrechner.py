@@ -182,7 +182,7 @@ class Main():
                 "Fremdkapital"][
                 "Langfristiges_FK"].values():
             self.langfristigesFK += lffk
-            
+
     def check_kennzahl_range(self, min, max, name, resultat):
         resultat = round(resultat, 2)
         if resultat >= min and resultat <= max:
@@ -208,7 +208,18 @@ class Main():
 
     def check_kennzahl(self, wert, name, resultat):
         resultat = round(resultat, 2)
-        if resultat >= wert:
+        if name == "Durchschnits-Debitorenzahlungsfrist":
+            if resultat < wert:
+                print(
+                    name, colorful.green(str(resultat)) +
+                    "[" + colorful.green("OK") + "]", "Richtwert: " +
+                    str(wert))
+            else:
+                print(
+                    name, colorful.red(str(resultat)) +
+                    "[" + colorful.red("Zu Hoch") + "]",
+                    "Richtwert: " + str(wert))
+        elif resultat >= wert:
             print(
                 name, colorful.green(str(resultat) + "% ") +
                 "[" + colorful.green("OK") + "]", "Richtwert: " +
