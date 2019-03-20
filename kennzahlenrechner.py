@@ -182,11 +182,7 @@ class Main():
                 "Fremdkapital"][
                 "Langfristiges_FK"].values():
             self.langfristigesFK += lffk
-
-    def validate_bilanz(self):
-        print("WIP")
-        # TODO
-
+            
     def check_kennzahl_range(self, min, max, name, resultat):
         resultat = round(resultat, 2)
         if resultat >= min and resultat <= max:
