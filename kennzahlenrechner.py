@@ -212,12 +212,12 @@ class Main():
             if resultat < wert:
                 print(
                     name, colorful.green(str(resultat)) +
-                    "[" + colorful.green("OK") + "]", "Richtwert: " +
+                    " [" + colorful.green("OK") + "]", "Richtwert: " +
                     str(wert))
             else:
                 print(
                     name, colorful.red(str(resultat)) +
-                    "[" + colorful.red("Zu Hoch") + "]",
+                    " [" + colorful.red("Zu Hoch") + "]",
                     "Richtwert: " + str(wert))
         elif resultat >= wert:
             print(
