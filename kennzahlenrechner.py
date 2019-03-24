@@ -12,7 +12,7 @@ class Kennzahlenrechner():
             with open("./bilanz.yml", 'r') as stream:
                 self.bilanz_yaml = yaml.load(stream)
         except Exception as e:
-            print(colorful.bold_red(e))
+            return(colorful.bold_red(e))
 
         # Standart Kennzahlen
         self.eigenkapitalrent = self.std_kennzahlen_yaml[
@@ -186,22 +186,22 @@ class Kennzahlenrechner():
     def check_kennzahl_range(self, min, max, name, resultat):
         resultat = round(resultat, 2)
         if resultat >= min and resultat <= max:
-            print(
+            return(
                 name, colorful.green(str(resultat) + "% ") +
                 "[" + colorful.green("OK") + "]", "Min: " + str(min) +
                 "% Max: " + str(max) + "%")
         elif resultat < min:
-            print(
+            return(
                 name, colorful.red(str(resultat) + "% ") +
                 "[" + colorful.red("Zu Tief") + "]", "Min: " + str(min) +
                 "% Max: " + str(max) + "%")
         elif resultat > max:
-            print(
+            return(
                 name, colorful.red(str(resultat) + "% ") +
                 "[" + colorful.red("Zu Hoch") + "]", "Min: " + str(min) +
                 "% Max: " + str(max) + "%")
         else:
-            print(
+            return(
                 name, colorful.red(str(resultat) + "% ") +
                 "[" + colorful.red("ERROR") + "]", "Min: " + str(min) +
                 "% Max: " + str(max) + "%")
@@ -210,22 +210,22 @@ class Kennzahlenrechner():
         resultat = round(resultat, 2)
         if name == "Durchschnits-Debitorenzahlungsfrist":
             if resultat < wert:
-                print(
+                return(
                     name, colorful.green(str(resultat)) +
                     " [" + colorful.green("OK") + "]", "Richtwert: " +
                     str(wert))
             else:
-                print(
+                return(
                     name, colorful.red(str(resultat)) +
                     " [" + colorful.red("Zu Hoch") + "]",
                     "Richtwert: " + str(wert))
         elif resultat >= wert:
-            print(
+            return(
                 name, colorful.green(str(resultat) + "% ") +
                 "[" + colorful.green("OK") + "]", "Richtwert: " +
                 str(wert) + "%")
         else:
-            print(
+            return(
                 name, colorful.red(str(resultat) + "% ") +
                 "[" + colorful.red("Nicht Genug") + "]",
                 "Richtwert: " + str(wert) + "%")
@@ -265,10 +265,10 @@ class Kennzahlenrechner():
     def cal_eigenkapitalrentabilitaet(self):
         resultat = self.reingewinn * 100 / (
             self.eigenkapital - self.reingewinn)
-        self.check_kennzahl(
+        return str(self.check_kennzahl(
             self.eigenkapitalrent,
             "Eigenkapitalrentabilität",
-            resultat)
+            resultat))
 
     def cal_umsatzrentabilitaet(self):
         resultat = self.reingewinn * 100 / self.ertrag
@@ -361,13 +361,13 @@ class Kennzahlenrechner():
                             "Eigenkapital"][
                             mb]
                     else:
-                        print(colorful.red("Keine Konten gefunden"))
+                        return(colorful.red("Keine Konten gefunden"))
                 zuwachskapital = self.eigenkapital - (
                             grundkapital +
                             anderes_eigen)
                 resultat = zuwachskapital * 100 / grundkapital
             else:
-                print(
+                return(
                     colorful.red(
                         "Das Konto",
                         self.benutzername,
@@ -392,33 +392,35 @@ class Kennzahlenrechner():
                     "Eigenkapital"][
                     "STAMMKAPITAL"]
             else:
-                print(
+                return(
                     colorful.red(
                         "Die Geschäftsform: " +
                         str(self.geschaeftsform) +
                         " ist ungültig"))
             zuwachskapital = self.eigenkapital - grundkapital
             resultat = zuwachskapital * 100 / grundkapital
-
         self.check_kennzahl(
             self.selbstfinanzierungsgrad,
             "Selbstfinanierungsgrad",
             resultat)
 
 
+
     def run_self(self):
-        self.cal_eigenkapitalrentabilitaet()
-        self.cal_gesamtkapitalrent()
-        self.cal_liquiditaetsgrad1()
-        self.cal_liquiditaetsgrad2()
-        self.cal_liquiditaetsgrad3()
-        self.cal_umsatzrentabilitaet()
-        self.cal_kapitalumschlag()
-        self.cal_fremdfinanzierungsgrad()
-        self.cal_eigenfinanzierungsgrad()
-        self.cal_anlageintensitaet()
-        self.cal_anlagedeckungsgrad1()
-        self.cal_anlagedeckungsgrad2()
-        self.cal_lagerumschlag()
-        self.cal_debitorenzahlungsfrist()
-        self.cal_selbstfinanzierungsgrad()
+        returnstring = "-------Bilanz----------"
+        returnstring = returnstring + "<br>" + self.cal_eigenkapitalrentabilitaet()
+        #self.cal_gesamtkapitalrent()
+        #self.cal_liquiditaetsgrad1()
+        #self.cal_liquiditaetsgrad2()
+        #self.cal_liquiditaetsgrad3()
+        #self.cal_umsatzrentabilitaet()
+        #self.cal_kapitalumschlag()
+        #self.cal_fremdfinanzierungsgrad()
+        #self.cal_eigenfinanzierungsgrad()
+        #self.cal_anlageintensitaet()
+        #self.cal_anlagedeckungsgrad1()
+        #self.cal_anlagedeckungsgrad2()
+        #self.cal_lagerumschlag()
+        #self.cal_debitorenzahlungsfrist()
+        #self.cal_selbstfinanzierungsgrad()
+        return returnstring
