@@ -1,4 +1,4 @@
-from kennzahlenrechner import Kennzahlenrechner
+from Kennzahlenrechner.kennzahlenrechner import Kennzahlenrechner
 import os
 
 def interactive():
