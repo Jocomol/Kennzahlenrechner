@@ -4,6 +4,7 @@ import os
 def interactive():
     user_input = "?"
     running = True
+    os.system("cd /home/Jocomol/kennzahlen_files")
     while running:
         if user_input == "help" or user_input == "?" or user_input == "Help":
             print(
