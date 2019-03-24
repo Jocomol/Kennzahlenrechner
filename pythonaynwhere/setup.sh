@@ -9,11 +9,12 @@ chmod +X ./*
 cp * $folder
 
 #copy the kennzahlenrechner
+cp kennzahlenrechner_shell.py $folder/..
 cd ..
 cp bilanz.yml $folder
 cp kennzahlenrechner.py $folder
 cp std_kennzahlen.yml $folder
-cp kennzahlenrechner_shell.py $folder/..
+
 
 #dowload requirements
 pip3 install -r requirements.txt
