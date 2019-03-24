@@ -15,7 +15,6 @@ cp bilanz.yml $folder &> /dev/null
 cp kennzahlenrechner.py $folder &> /dev/null
 cp std_kennzahlen.yml $folder &> /dev/null
 
-
 #dowload requirements
 pip3 install -r requirements.txt &> /dev/null
 
