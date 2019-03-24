@@ -4,12 +4,20 @@ import ruamel.yaml
 
 class Kennzahlenrechner():
 
-    def __init__(self):
+    def __init__(self, server):
         yaml = ruamel.yaml.YAML(typ='safe')
+        server_string = "/home/Jocomol/kennzahlen_files/"
+        local_string = "./"
+        if server:
+            yml_path1 = server_string + "std_kennzahlen.yml"
+            yml_path2 = server_string + "bilanz.yml"
+        else:
+            yml_path1 = local_string + "std_kennzahlen.yml"
+            yml_path2 = local_string + "bilanz.yml"
         try:
-            with open("./std_kennzahlen.yml", 'r') as stream:
+            with open(yml_path1, 'r') as stream:
                 self.std_kennzahlen_yaml = yaml.load(stream)
-            with open("./bilanz.yml", 'r') as stream:
+            with open(yml_path2, 'r') as stream:
                 self.bilanz_yaml = yaml.load(stream)
         except Exception as e:
             print(colorful.bold_red(e))
@@ -423,5 +431,5 @@ class Kennzahlenrechner():
         self.cal_selbstfinanzierungsgrad()
 
 if __name__ == "__main__":
-    programm = Kennzahlenrechner()
+    programm = Kennzahlenrechner(False)
     programm.run()
