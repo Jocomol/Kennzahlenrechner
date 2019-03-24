@@ -1,54 +1,51 @@
 Bilanz:
-  GESAMTVERMOEGEN: 1000
+  GESAMTVERMOEGEN: 260
   Aktiven:
     Umlaufvermoegen:
-      LIQUIDE_MITTEL: 100
-      DEBITOREN: 250
-      VORRAETE: 250
+      LIQUIDE_MITTEL: 40
+      DEBITOREN: 30
+      VORRAETE: 15
     Anlagevermoegen:
       mobiliar: 100
-      immobilien: 300
+      edv: 55
+      immobilien: 20
   Passiven:
     Fremdkapital:
       Kurzfristiges_FK:
-        Kreditoren: 200
-        Bankschuld: 100
+        Kreditoren: 70
       Langfristiges_FK:
-        Darlehen: 50
-        Hypotheken: 200
+        Darlehen: 35
+        Hypotheken: 10
     Eigenkapital:
-      AKTIENKAPITAL: 300
+      AKTIENKAPITAL: 100
       STAMMKAPITAL: 0
       NAMEHIER_KAPITAL: 0
       NAMEHIER2_KAPITAL: 0
       EIGENKAPITAL: 0
-      reserven: 100
-      gewinnvortrag: 50
+      reserven: 33
+      gewinnvortrag: 12
 
 Erfolgsrechnung:
-  GEWINN: 50
+  GEWINN: 12
   VERLUST: 0
   Aufwand:
-    personal: 850
-    WARENAUFWAND: 450
-    miete: 135
-    ZINSEN: 15
-    abschreibungen: 70
-    unterhalt: 120
-    werbung: 170
-    betriebsaufwand: 50
-    anderer_aufwand: 90
+    personal: 431
+    WARENAUFWAND: 5
+    ZINSEN: 4
+    abschreibungen: 20
+    anderer_aufwand: 83
   Ertrag:
-    VERKAUFSERLOES: 2000
+    VERKAUFSERLOES: 535
+    zinsertrag: 20
 
 Bemerkungen:
   geschaeftsform: 'AG' # Einzel, AG, GMBH, KOLLEKT
-  vorraete_anfangs_jahr: 0
-  debitorenstand_anfangs_jahr: 250
-  umsatzrentabilitaet: 2.5
-  kapitalumschlag: 2
-  anlagenintensitaet: 40
-  selbstfinanzierungsgrad: 50
+  vorraete_anfangs_jahr: 16
+  debitorenstand_anfangs_jahr: 26
+  umsatzrentabilitaet: 3
+  kapitalumschlag: 3
+  anlagenintensitaet: 50
+  selbstfinanzierungsgrad: 30
   #Falls geschaeftsform aud "KOLLEKT" gesetzt muss man hier angeben welches Konto genuzt werden soll
   benutzername: NULL
   Mitbesitzer:

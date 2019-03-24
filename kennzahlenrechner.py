@@ -304,7 +304,7 @@ class Main():
         resultat = self.anlagevermoegen * 100 / self.gesamtkapital
         self.check_kennzahl(
             self.anlagenintensitaet,
-            "Anlagevermögen",
+            "Anlageveintensität",
             resultat)
 
     def cal_anlagedeckungsgrad1(self):
