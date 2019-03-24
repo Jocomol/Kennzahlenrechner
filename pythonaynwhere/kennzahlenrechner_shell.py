@@ -28,7 +28,7 @@ def interactive():
                     "------------------------------" +
                     "--------------------------------")
         elif user_input == "start":
-            rechner = Kennzahlenrechner()
+            rechner = Kennzahlenrechner(True)
             rechner.run()
         elif user_input == "bilanz":
             os.system("nano /home/Jocomol/kennzahlen_files/bilanz.yml")
