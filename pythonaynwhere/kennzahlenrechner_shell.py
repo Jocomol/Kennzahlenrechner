@@ -1,4 +1,4 @@
-from Kennzahlenrechner.kennzahlenrechner import Kennzahlenrechner
+from kennzahlen_files.kennzahlenrechner import Kennzahlenrechner
 import os
 
 
