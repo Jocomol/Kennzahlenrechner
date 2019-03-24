@@ -2,7 +2,7 @@ import colorful
 import ruamel.yaml
 
 
-class Main():
+class Kennzahlenrechner():
 
     def __init__(self):
         yaml = ruamel.yaml.YAML(typ='safe')
@@ -405,21 +405,23 @@ class Main():
             "Selbstfinanierungsgrad",
             resultat)
 
+    def run(self):
+        self.cal_eigenkapitalrentabilitaet()
+        self.cal_gesamtkapitalrent()
+        self.cal_liquiditaetsgrad1()
+        self.cal_liquiditaetsgrad2()
+        self.cal_liquiditaetsgrad3()
+        self.cal_umsatzrentabilitaet()
+        self.cal_kapitalumschlag()
+        self.cal_fremdfinanzierungsgrad()
+        self.cal_eigenfinanzierungsgrad()
+        self.cal_anlageintensitaet()
+        self.cal_anlagedeckungsgrad1()
+        self.cal_anlagedeckungsgrad2()
+        self.cal_lagerumschlag()
+        self.cal_debitorenzahlungsfrist()
+        self.cal_selbstfinanzierungsgrad()
 
 if __name__ == "__main__":
-    programm = Main()
-    programm.cal_eigenkapitalrentabilitaet()
-    programm.cal_gesamtkapitalrent()
-    programm.cal_liquiditaetsgrad1()
-    programm.cal_liquiditaetsgrad2()
-    programm.cal_liquiditaetsgrad3()
-    programm.cal_umsatzrentabilitaet()
-    programm.cal_kapitalumschlag()
-    programm.cal_fremdfinanzierungsgrad()
-    programm.cal_eigenfinanzierungsgrad()
-    programm.cal_anlageintensitaet()
-    programm.cal_anlagedeckungsgrad1()
-    programm.cal_anlagedeckungsgrad2()
-    programm.cal_lagerumschlag()
-    programm.cal_debitorenzahlungsfrist()
-    programm.cal_selbstfinanzierungsgrad()
+    programm = Kennzahlenrechner()
+    programm.run()

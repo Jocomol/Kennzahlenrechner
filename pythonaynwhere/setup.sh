@@ -1,23 +1,19 @@
 #!/bin/bash
-folder="/var/kennzahlenrechner"
+folder="/home/Jocomol/kennzahlen_files"
 # Renew folder structure
 rm -r $folder
 mkdir $folder
 
 #Make helpscripts executable
 chmod +X ./*
-
-#move helpscripts to /usr/bin
-cp start.sh /usr/bin/start
-cp bilanz.sh /usr/bin/bilanz
-cp kennzahlen.sh /usr/bin/kennzahlen
-cp kennzahlenhelp.sh /usr/bin/kennzahlenhelp
+cp * $folder
 
 #copy the kennzahlenrechner
 cd ..
 cp bilanz.yml $folder
 cp kennzahlenrechner.py $folder
 cp std_kennzahlen.yml $folder
+cp kennzahlenrechner_shell.py $folder/..
 
 #dowload requirements
 pip3 install -r requirements.txt
