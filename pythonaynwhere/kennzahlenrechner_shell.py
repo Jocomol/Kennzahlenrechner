@@ -1,6 +1,7 @@
 from Kennzahlenrechner.kennzahlenrechner import Kennzahlenrechner
 import os
 
+
 def interactive():
     user_input = "?"
     running = True
@@ -40,9 +41,10 @@ def interactive():
             running = False
             break
         else:
-            print(user_input,"ungültige Eingabe")
+            print(user_input, "ungültige Eingabe")
 
         user_input = input("kennzahlenrechner command: ")
 
-if __name__ ==  "__main__":
+
+if __name__ == "__main__":
     interactive()

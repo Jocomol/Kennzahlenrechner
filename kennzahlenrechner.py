@@ -430,6 +430,7 @@ class Kennzahlenrechner():
         self.cal_debitorenzahlungsfrist()
         self.cal_selbstfinanzierungsgrad()
 
+
 if __name__ == "__main__":
     programm = Kennzahlenrechner(False)
     programm.run()
