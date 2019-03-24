@@ -5,7 +5,7 @@ def interactive():
     user_input = "?"
     running = True
     while running:
-        if user_input is "help" or user_input is "?" or user_input is "Help":
+        if user_input == "help" or user_input == "?" or user_input == "Help":
             print(
                     "--------------------------" +
                     "------------------------------------")
@@ -27,16 +27,16 @@ def interactive():
             print(
                     "------------------------------" +
                     "--------------------------------")
-        elif user_input is "start":
+        elif user_input == "start":
             rechner = Kennzahlenrechner()
             rechner.run()
-        elif user_input is "bilanz":
+        elif user_input == "bilanz":
             os.system("nano /home/Jocomol/kennzahlen_files/bilanz.yml")
-        elif user_input is "kennzahlen":
+        elif user_input == "kennzahlen":
             os.system(
                     "nano /home/Jocomol/kennzahlen_files" +
                     "/std_kennzahlen.yml")
-        elif user_input is "exit":
+        elif user_input == "exit":
             running = False
             break
         else:
@@ -44,5 +44,5 @@ def interactive():
 
         user_input = input("kennzahlenrechner command: ")
 
-if __name__ == "__main__":
+if __name__ ==  "__main__":
     interactive()
