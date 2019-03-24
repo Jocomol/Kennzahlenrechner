@@ -2,7 +2,7 @@ import colorful
 import ruamel.yaml
 
 
-class Main():
+class Kennzahlenrechner():
 
     def __init__(self):
         yaml = ruamel.yaml.YAML(typ='safe')
